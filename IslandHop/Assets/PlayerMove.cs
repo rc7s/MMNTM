@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PlayerMove : MonoBehaviour {
 
 	public Rigidbody rb;
@@ -17,6 +18,8 @@ public class PlayerMove : MonoBehaviour {
 	public bool onWall;
     private int velcheck;
 
+    public Vector3 shake;
+
 	// Use this for initialization
 	void Start () {
 
@@ -30,7 +33,11 @@ public class PlayerMove : MonoBehaviour {
         maxSpeed = 12f;
 
         velcheck = 0;
-	}
+
+        shake.x = 0f;
+        shake.y = -0.05f;
+        shake.z = 0f;
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -128,7 +135,8 @@ public class PlayerMove : MonoBehaviour {
         
             if (collision.gameObject.tag == "floor")
             {
-                isGrounded = true;
+                // iTween.ShakePosition(gameObject, shake, 1); fix when colliding
+                 isGrounded = true;
             }
             if (collision.gameObject.tag == "wall")
             {
